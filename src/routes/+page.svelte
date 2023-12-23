@@ -3,6 +3,7 @@
   import Exercise from "$lib/components/Exercise.svelte";
   import FlightProfile from "$lib/components/FlightProfile.svelte";
   import { demoDeckCard } from '$lib/data/demoDeckCard.js'
+	import CriteriaSetup from "../lib/components/CriteriaSetup.svelte";
 
   const exercises = demoDeckCard.exercises;
 </script>
@@ -14,6 +15,8 @@
 {/each}
 
 <FlightProfile data={demoDeckCard.configuration} />
+
+<CriteriaSetup exercises={exercises} />
   
 <style>
   h2 {
