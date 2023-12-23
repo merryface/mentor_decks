@@ -1,13 +1,13 @@
 <script>
-  export let image;
-  export let assessmentQuestions
+  export let data
+  const image = data.image
+  const assessmentQuestions = data.assessmentQuestions
 </script>
 
 <div class="brief-and-start-assessment">
   <img class="board-brief" src="{image}" alt="Vatsim UK logo">
     <div class="qa-container">
       <h3>Pre-lesson Assessment</h3>
-      <!-- For each to loop through each assessment Question -->
       {#each assessmentQuestions as question}
       <div class="qa-item">
         <div class="question">{question.question}</div>
