@@ -2,11 +2,15 @@
   import BriefAndAssessment from "$lib/components/BriefAndAssessment.svelte";
   import Exercise from "$lib/components/Exercise.svelte";
   import { demoDeckCard } from '$lib/data/demoDeckCard.js'
+
+  const exercises = demoDeckCard.exercises;
 </script>
 
 <h2>Lesson Deck Card</h2>
 <BriefAndAssessment data={demoDeckCard}/>
-<Exercise />
+{#each exercises as exercise}
+<Exercise data={exercise} />
+{/each}
 
 <style>
   h2 {

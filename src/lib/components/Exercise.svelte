@@ -1,9 +1,17 @@
+<script>
+  export let data;
+  const title = data.title;
+  const exerciseItems = data.exerciseItems;
+</script>
+
 <div class="exerciseDetails">
-  <h3>Exercise Title</h3>
+  <h3>{title}</h3>
+  {#each exerciseItems as exerciseItem}
   <div class="exercise-item">
-    <div class="item">The action the mentee must perform</div>
-    <div class="criteria">The standard at which the criteria must be met</div>
+    <div class="item">{exerciseItem.item}</div>
+    <div class="criteria">{exerciseItem.criteria}</div>
   </div>
+  {/each}
 </div>
 
 <style>
