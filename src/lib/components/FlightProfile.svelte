@@ -117,11 +117,18 @@
       </div>
     </div>
   </div>
+  {#if data.notes}
+  <div class="notes">
+    <h4>Additional profile notes</h4>
+    <p>{data.notes}</p>
+  </div>
+  {/if}
 </div>
 
 <style>
   .flight-profile {
     margin-top: 3rem;
+    margin-bottom: 2rem;
   }
 
   h3 {
@@ -164,5 +171,8 @@
     color: #17375E;
   }
 
-
+  .notes p {
+    font-size: 1.3rem;
+    color: #000;
+  }
 </style>

@@ -63,5 +63,6 @@ export let demoDeckCard = {
     pressure: '1013hPa',
     visibility: '+10km',
     ceiling: 'None',
+    notes: 'Additional information, such as changing weather, or specific orders to carry out exercises (if necessary). Can be blank.'
   }
 }
