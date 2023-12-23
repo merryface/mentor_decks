@@ -3,8 +3,10 @@
 </script>
 
 <header>
-  <img src="{exampleImage}" alt="Vatsim UK logo">
-  <h1>Instructor Deck</h1>
+  <div class="inner">
+    <img src="{exampleImage}" alt="Vatsim UK logo">
+    <h1>Instructor Deck</h1>
+  </div>
 </header>
 
 <style>
@@ -14,11 +16,17 @@
     font-size: 2rem;
     width: 100%;
     height: 5rem;
+  }
+
+  .inner {
     display: flex;
+    width: 100%;
+    max-width: 1400px;
+    height: 100%;
     align-items: center;
     justify-content: space-between;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 
   img {
