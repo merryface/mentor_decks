@@ -47,7 +47,7 @@
   .qa-item {
     display: flex;
     flex-direction: row;
-    margin-bottom: 10px;
+    margin-bottom: 1px;
   }
 
   .question, .answer {
