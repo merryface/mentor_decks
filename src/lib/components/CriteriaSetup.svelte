@@ -1,8 +1,35 @@
 <script>
   export let exercises;
+
+  let tableElement;
+
+  function getTableHtmlWithCurrentValues() {
+    // Clone the table to not alter the original
+    const clonedTable = tableElement.cloneNode(true);
+
+    // Replace each select element with its current value
+    clonedTable.querySelectorAll('select').forEach(select => {
+      const currentValue = select.options[select.selectedIndex].textContent;
+      const textNode = document.createTextNode(currentValue);
+      select.parentNode.replaceChild(textNode, select);
+    });
+
+    return clonedTable.outerHTML;
+  }
+
+  async function copyTableHtml() {
+    const tableHtml = getTableHtmlWithCurrentValues();
+
+    try {
+      await navigator.clipboard.writeText(tableHtml);
+      alert('Table HTML copied to clipboard!');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
 </script>
 
-<div class="exercises-container">
+<div class="exercises-container" bind:this={tableElement}>
   {#each exercises as exercise}
     <table class="exercise-table">
       <thead>
@@ -35,6 +62,9 @@
     </table>
   {/each}
 </div>
+
+<button on:click={copyTableHtml}>Copy Table HTML</button>
+
 
 <style>
   .exercises-container {
@@ -109,6 +139,15 @@
     .exercise-table th, .exercise-table td {
       font-size: 1rem;
     }
+  }
+
+  button {
+    background-color: #17375E;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    padding: 1rem 2rem;
+    border-radius: 5px;
   }
 </style>
 
