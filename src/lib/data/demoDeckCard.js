@@ -48,5 +48,20 @@ export let demoDeckCard = {
         }
       ]
     }
-  ]
+  ],
+  configuration: {
+    status: 'Cold & dark',
+    fuel: '50-100%',
+    payload: '189kg',
+    bags: '20kg',
+    location: 'Parking ramp',
+    atc: 'VATSIM',
+    runway: '27L or as per ATC',
+    liveWeather: false,
+    wind: '230/10',
+    temp: '15°C',
+    pressure: '1013hPa',
+    visibility: '+10km',
+    ceiling: 'None',
+  }
 }

@@ -32,12 +32,6 @@
   object-fit: contain;
   }
 
-  h3 {
-    margin-bottom: 1rem;
-    font-size: 2rem;
-    color:#17375E;
-  }
-
   .qa-container {
     display: flex;
     flex-direction: column;

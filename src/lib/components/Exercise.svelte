@@ -15,12 +15,6 @@
 </div>
 
 <style>
-  h3 {
-    margin-bottom: 1rem;
-    font-size: 2rem;
-    color:#17375E;
-  }
-
   .exerciseDetails {
     width: 100%;
     gap: 2rem;

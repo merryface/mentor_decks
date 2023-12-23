@@ -60,3 +60,15 @@ table {
 html {
   font-size: 10px;
 }
+
+h3 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color:#17375E;
+}
+
+h4 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color:#17375E;
+}

@@ -1,6 +1,7 @@
 <script>
   import BriefAndAssessment from "$lib/components/BriefAndAssessment.svelte";
   import Exercise from "$lib/components/Exercise.svelte";
+  import FlightProfile from "$lib/components/FlightProfile.svelte";
   import { demoDeckCard } from '$lib/data/demoDeckCard.js'
 
   const exercises = demoDeckCard.exercises;
@@ -12,6 +13,8 @@
 <Exercise data={exercise} />
 {/each}
 
+<FlightProfile data={demoDeckCard.configuration} />
+  
 <style>
   h2 {
     margin-bottom: 1rem;
