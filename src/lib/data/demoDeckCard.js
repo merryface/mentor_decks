@@ -2,6 +2,7 @@
 import placeholder from '$lib/assets/placeholder.png'
 
 export let demoDeckCard = {
+  title: "Lesson Title",
   image: placeholder,
   assessmentQuestions: [
     {
