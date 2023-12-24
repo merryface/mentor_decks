@@ -37,7 +37,7 @@
         <tr>
           <th>Item</th>
           <th>Criteria</th>
-          <th>Rating</th>
+          <th>Competency</th>
         </tr>
       </thead>
       <tbody>
@@ -64,7 +64,30 @@
   {/each}
 </div>
 
+<div class="competency-guide">
+  <div class="score">
+    <div class="box">1</div>
+    <div class="score-label">Remediation Needed</div>
+  </div>
+
+  <div class="score">
+    <div class="box">2</div>
+    <div class="score-label">Minimum Standards</div>
+  </div>
+
+  <div class="score">
+    <div class="box">3</div>
+    <div class="score-label">Good</div>
+  </div>
+
+  <div class="score">
+    <div class="box">4</div>
+    <div class="score-label">Excellent</div>
+  </div>
+</div>
+
 <button on:click={copyTableHtml}>Copy Table HTML</button>
+
 
 
 <style>
@@ -149,6 +172,57 @@
     font-size: 1.7rem;
     padding: 1rem 2rem;
     border-radius: 5px;
+  }
+
+  .competency-guide {
+    display: flex;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 15rem;
+  }
+
+  .box {
+    border: 1px solid #17375E;
+    height: 4rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .score-label {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .score:nth-child(1) .box {
+    background: orange;
+    border-right: none;
+  }
+
+  .score:nth-child(2) .box {
+    background: yellow;
+    border-left: none;
+    border-right: none;
+  }
+
+  .score:nth-child(3) .box {
+    background: lime;
+    border-left: none;
+    border-right: none;
+  }
+
+  .score:nth-child(4) .box {
+    background: rgb(8, 193, 8);
+    border-left: none;
   }
 
   /* media query */
