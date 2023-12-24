@@ -23,7 +23,7 @@
 <h2>{rating.charAt(0).toUpperCase() + rating.slice(1)} Rating</h2>
 <ul>
   {#each lessons as lesson}
-    <li><a href={`/{rating}/${lesson.id}`}>{lesson.lessonTitle}</a></li>
+    <li><a href={`/${rating}/${lesson.id}`}>{lesson.lessonTitle}</a></li>
   {/each}
 </ul>
 
