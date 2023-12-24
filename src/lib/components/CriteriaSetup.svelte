@@ -29,6 +29,7 @@
   }
 </script>
 
+<h3>HTML Table Generator</h3>
 <div class="exercises-container" bind:this={tableElement}>
   {#each exercises as exercise}
     <table class="exercise-table">
@@ -145,9 +146,16 @@
     background-color: #17375E;
     border: none;
     color: #fff;
-    font-size: 2rem;
+    font-size: 1.7rem;
     padding: 1rem 2rem;
     border-radius: 5px;
+  }
+
+  /* media query */
+  @media screen and (max-width: 768px) {
+    button {
+      font-size: 1.5rem;
+    }
   }
 </style>
 

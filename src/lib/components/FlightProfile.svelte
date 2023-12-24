@@ -175,4 +175,20 @@
     font-size: 1.3rem;
     color: #000;
   }
+
+  /* media query */
+  @media screen and (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .notes {
+      margin-top: 3rem;
+    }
+
+    .flight-profile {
+      margin-bottom: 4rem;
+    }
+  }
 </style>
