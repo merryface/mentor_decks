@@ -21,7 +21,6 @@
 
         // Find the specific lesson with the given mockId
         lesson = lessons[mockId];
-        // console.log(lesson);
         if (!lesson) {
           throw error(404, 'Lesson not found');
         }
