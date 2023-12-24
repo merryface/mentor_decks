@@ -5,10 +5,11 @@
   import CriteriaSetup from "$lib/components/CriteriaSetup.svelte";
 
   export let data;
+  const lessonTitle = data.title;
   const exercises = data.exercises;
 </script>
 
-<h2>Lesson Deck Card</h2>
+<h2>{lessonTitle}</h2>
 <BriefAndAssessment data={data}/>
 
 {#each exercises as exercise}
