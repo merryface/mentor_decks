@@ -17,7 +17,7 @@
 </script>
 
 
-<button type="submit">Log in With VATSIM credentials</button>
+<button on:click={handleLogin}>Log in With VATSIM credentials</button>
 <p>This login page is temporarily just a mockup. Click login to access the website which is currently available to anyone.</p>
 
 <style>
