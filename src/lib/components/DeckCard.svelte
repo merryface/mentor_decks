@@ -5,7 +5,8 @@
   import CriteriaSetup from "$lib/components/CriteriaSetup.svelte";
 
   export let data;
-  const lessonTitle = data.title;
+  console.log(data);
+  const lessonTitle = data.lessonTitle;
   const exercises = data.exercises;
 </script>
 
