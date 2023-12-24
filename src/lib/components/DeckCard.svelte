@@ -10,12 +10,12 @@
 
 <h2>Lesson Deck Card</h2>
 <BriefAndAssessment data={data}/>
+
 {#each exercises as exercise}
 <Exercise data={exercise} />
 {/each}
 
 <FlightProfile data={data.configuration} />
-
 <CriteriaSetup exercises={exercises} />
   
 <style>
