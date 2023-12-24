@@ -20,7 +20,7 @@
   });
 </script>
 
-<h1>{rating.toUpperCase()} Rating</h1>
+<h1>{rating.charAt(0).toUpperCase() + rating.slice(1)} Rating</h1>
 <ul>
   {#each lessons as lesson}
     <li><a href={`/{rating}/${lesson.id}`}>{lesson.lessonTitle}</a></li>
