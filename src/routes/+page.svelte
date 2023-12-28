@@ -1,18 +1,10 @@
 <script>
-  import { goto } from '$app/navigation';
-
-  let username = '';
-  let password = '';
+  const VATSIM_CLIENT_ID = import.meta.env.VITE_VATSIM_CLIENT_ID;
+  const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI;
+  const VATSIM_OAUTH_ENDPOINT = import.meta.env.VITE_VATSIM_OAUTH_ENDPOINT;
 
   async function handleLogin() {
-    // need to implement OAuth2 here for VATSIM. 
-    goto('/dashboard');
-
-    try {
-      // Login logic here
-    } catch (error) {
-      // Handle error here
-    }
+    window.location = `${VATSIM_OAUTH_ENDPOINT}/oauth/authorize?response_type=code&client_id=${VATSIM_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=full_name+vatsim_details`;
   }
 </script>
 
