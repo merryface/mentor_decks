@@ -171,10 +171,12 @@
       <input type="text" bind:value={config.payload} placeholder="Payload" />
     </label>
 
-    <label class="switch">
+    <label>
       Live Weather
-      <input type="checkbox" bind:checked={config.liveWeather} />
-      <span class="slider"></span>
+      <div class="switch">
+        <input type="checkbox" bind:checked={config.liveWeather} />
+        <span class="slider round"></span>
+      </div>
     </label>
 
     {#if !config.liveWeather}
@@ -300,9 +302,9 @@
   .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
-    margin-left: 10px;
+    width: 6rem;
+    height: 2.7rem;
+    margin-top: 0.4rem;
   }
 
   /* Hide default checkbox */
@@ -328,8 +330,8 @@
   .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
+    height: 2rem;
+    width: 2rem;
     left: 4px;
     bottom: 4px;
     background-color: white;
@@ -342,13 +344,13 @@
   }
 
   input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px #17375E;
   }
 
   input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    -webkit-transform: translateX(3rem);
+    -ms-transform: translateX(3rem);
+    transform: translateX(3rem);
   }
 
   /* Rounded sliders */
