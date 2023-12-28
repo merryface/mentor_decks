@@ -1,34 +1,13 @@
-export const load = async ({fetch, cookies}) => {
-  console.log("load");
-    if (!cookies.get("hq_token")) {
-      console.log("no token");
-        return {
-            loggedin: false,
-            user: null,
-            roles: null
-        }
-    }
+import { verifyToken } from "$lib/auth";
 
-    let token = cookies.get("hq_token");
-    console.log(token);
+export const load = async ({ fetch, cookies, url }) => {
+    const token = cookies.get("hq_token");
+    const loggedin = token && verifyToken(token) !== null;
 
-    if (maybe_cid === null) {
-        return {
-            loggedin: false,
-            user: null,
-            roles: null
-        }
-    }
-
-    let cid = maybe_cid;
-    console.log(cid, {
-      loggedin: true,
-      user: user
-  });
-    
-
+    // Return authentication data as props
     return {
-        loggedin: true,
-        user: user
+        props: {
+            loggedin
+        }
     };
 };
