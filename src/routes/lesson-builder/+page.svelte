@@ -26,6 +26,17 @@
     }
   };
 
+  const reset = () => {
+    lesson = {
+      id: 9999,
+      lessonTitle: "",
+      image: "",
+      assessmentQuestions: [],
+      exercises: [],
+      configuration: {}
+    };
+  };
+
   const addQuestion = () => {
     lesson.assessmentQuestions = [
       ...lesson.assessmentQuestions,
@@ -36,6 +47,7 @@
   };
 
   const addExercise = () => {
+    if (exerciseTitle === '') return;
     lesson.exercises = [
       ...lesson.exercises,
       { title: exerciseTitle, exerciseItems: [] }
@@ -44,6 +56,7 @@
   };
 
   const addExerciseItem = () => {
+    if (exerciseItem.item === '' || exerciseItem.criteria === '') return;
     if (lesson.exercises.length > 0) {
       let updatedExercises = [...lesson.exercises];
       updatedExercises[selectedItemIndex].exerciseItems = [
@@ -58,6 +71,8 @@
   onMount(() => {
   });
 </script>
+
+<h2>Lesson Builder</h2>
 
 <form>
   <label>
@@ -87,6 +102,7 @@
     <button type="button" on:click={addExercise}>Add Exercise</button>
   </div>
 
+  <div class="multiPart">
   {#if lesson.exercises.length > 0}
     <label>
       Select Exercise to add Items to
@@ -107,33 +123,92 @@
       <input type="text" bind:value={exerciseItem.criteria} placeholder="Exercise criteria" />
     </label>
     <button type="button" on:click={addExerciseItem}>Add Item</button>
-
-    <div>
-      <p>Exercise Items</p>
-      {#each lesson.exercises as exercise}
-        {#each exercise.exerciseItems as exerciseItem}
-          <p>{exerciseItem.item}</p>
-          <p>{exerciseItem.criteria}</p>
-        {/each}
-      {/each}
-    </div>
   {/if}
+  </div>
 
-  <button type="button" on:click={addToClipboard}>Copy to Clipboard</button>
+
 </form>
 
 <pre>{JSON.stringify(lesson, null, 2)}</pre>
+<div class="pre-buttons">
+  <button type="button" on:click={addToClipboard}>Copy to Clipboard</button>
+  <button class="warning" type="button" on:click={reset}>Reset</button>
+</div>
+
 
 <style>
+  h2 {
+    margin-bottom: 1rem;
+    font-size: 3rem;
+    font-weight: bold;
+    color:#17375E;
+  }
+
   form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  p {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  label {
+    font-size: 1.3rem;
+  }
+
+  input, select {
+    margin-top: 0.4rem;
+    font-size: 1.3rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #17375E;
   }
 
   .multiPart, label {
     display: flex;
     flex-direction: column;
+  }
+
+  .multiPart {
+    border: 1px solid #17375E;
+    border-radius: 5px;
+    padding: 1rem;
     gap: 1rem;
+  }
+
+  pre {
+    background-color: #17375E;
+    color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+  }
+
+  button {
+    background-color: #17375E;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+
+  .pre-buttons button {
+    height: 3rem;
+    width: 15rem;
+  }
+
+  .pre-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .warning {
+    background-color: rgb(188, 14, 14);
   }
 </style>
