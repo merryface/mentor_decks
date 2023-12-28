@@ -17,6 +17,26 @@
   let selectedItemIndex = 0; // Index of the selected exercise
   let exerciseItem = { item: "", criteria: "" };
 
+  let config = {
+    status: "Cold & dark",
+    fuel: "50-100%",
+    payload: "189kg",
+    bags: "20kg",
+    location: "Parking ramp",
+    atc: "None",
+    runway: "27L",
+    liveWeather: false,
+    wind: "Calm",
+    temp: "15°C",
+    pressure: "1013hPa",
+    visibility: "+10km",
+    ceiling: "None",
+    notes: ""
+  };
+
+  // Update lesson configuration whenever config changes
+  $: lesson.configuration = config;
+
   const addToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(JSON.stringify(lesson, null, 2));
@@ -102,8 +122,8 @@
     <button type="button" on:click={addExercise}>Add Exercise</button>
   </div>
 
-  <div class="multiPart">
   {#if lesson.exercises.length > 0}
+  <div class="multiPart">
     <label>
       Select Exercise to add Items to
       <select bind:value={selectedItemIndex}>
@@ -123,10 +143,74 @@
       <input type="text" bind:value={exerciseItem.criteria} placeholder="Exercise criteria" />
     </label>
     <button type="button" on:click={addExerciseItem}>Add Item</button>
+  </div>
   {/if}
+
+  <div class="multiPart">
+    <p>Configuration</p>
+    <label>
+      Image
+      <input type="text" bind:value={lesson.image} placeholder="Image URL" />
+    </label>
   </div>
 
+  <div class="multiPart">
+    <p>Configuration</p>
+    <label>
+      Status
+      <input type="text" bind:value={config.status} placeholder="Status" />
+    </label>
 
+    <label>
+      Fuel
+      <input type="text" bind:value={config.fuel} placeholder="Fuel" />
+    </label>
+
+    <label>
+      Crew & Pax Weights
+      <input type="text" bind:value={config.payload} placeholder="Payload" />
+    </label>
+
+    <label class="switch">
+      Live Weather
+      <input type="checkbox" bind:checked={config.liveWeather} />
+      <span class="slider"></span>
+    </label>
+
+    {#if !config.liveWeather}
+    <label>
+      Wind
+      <input type="text" bind:value={config.wind} placeholder="Wind" />
+    </label>
+
+    <label>
+      Temperature
+      <input type="text" bind:value={config.temp} placeholder="Temperature" />
+    </label>
+
+    <label>
+      Pressure
+      <input type="text" bind:value={config.pressure} placeholder="Pressure" />
+    </label>
+
+    <label>
+      Visibility
+      <input type="text" bind:value={config.visibility} placeholder="Visibility" />
+    </label>
+
+    <label>
+      Ceiling
+      <input type="text" bind:value={config.ceiling} placeholder="Ceiling" />
+    </label>
+    {/if}
+
+
+
+    <label>
+      Notes
+      <textarea bind:value={config.notes} placeholder="Notes"></textarea>
+    </label>
+  </div>
 </form>
 
 <pre>{JSON.stringify(lesson, null, 2)}</pre>
@@ -210,5 +294,69 @@
 
   .warning {
     background-color: rgb(188, 14, 14);
+  }
+
+  /* The switch - the box around the slider */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-left: 10px;
+  }
+
+  /* Hide default checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
   }
 </style>
