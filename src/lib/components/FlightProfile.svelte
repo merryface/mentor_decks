@@ -26,7 +26,7 @@
         <div class="line paxWeight">
           <div class="label">
             <i class="fa-solid fa-person-walking-luggage"></i>
-            <span>Occupents Weight: </span>
+            <span>Crew & Pax Weight: </span>
           </div>
           <p class="line data">{data.payload}</p>
         </div>
