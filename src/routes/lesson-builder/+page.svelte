@@ -37,6 +37,11 @@
   // Update lesson configuration whenever config changes
   $: lesson.configuration = config;
 
+  const saveToLocalStorage = () => {
+    localStorage.setItem('lessonData', JSON.stringify(lesson));
+    console.log('Data saved to localStorage');
+  };
+
   const addToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(JSON.stringify(lesson, null, 2));
@@ -55,6 +60,8 @@
       exercises: [],
       configuration: {}
     };
+    localStorage.removeItem('lessonData');
+    console.log('Data reset and cleared from localStorage');
   };
 
   const addQuestion = () => {
@@ -89,10 +96,22 @@
   };
 
   onMount(() => {
+    const savedData = localStorage.getItem('lessonData');
+    if (savedData) {
+      try {
+        const parsedData = JSON.parse(savedData);
+        lesson = parsedData;
+      } catch (error) {
+        console.error("Error parsing saved data", error);
+      }
+    }
   });
 </script>
 
-<h2>Lesson Builder</h2>
+<div class="top">
+  <h2>Lesson Builder</h2>
+  <button type="button" on:click={saveToLocalStorage}>Save</button>
+</div>
 
 <form>
   <label>
@@ -145,14 +164,6 @@
     <button type="button" on:click={addExerciseItem}>Add Item</button>
   </div>
   {/if}
-
-  <div class="multiPart">
-    <p>Configuration</p>
-    <label>
-      Image
-      <input type="text" bind:value={lesson.image} placeholder="Image URL" />
-    </label>
-  </div>
 
   <div class="multiPart">
     <p>Configuration</p>
@@ -210,7 +221,7 @@
 
     <label>
       Notes
-      <textarea bind:value={config.notes} placeholder="Notes"></textarea>
+      <textarea bind:value={config.notes} placeholder="Notes" maxlength="250"></textarea>
     </label>
   </div>
 </form>
