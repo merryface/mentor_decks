@@ -1,10 +1,8 @@
-import { verifyToken } from "$lib/auth";
-
-export const load = async ({ fetch, cookies, url }) => {
+export const load = async ({ fetch, cookies }) => {
     const token = cookies.get("hq_token");
-    const loggedin = token && verifyToken(token) !== null;
+    const loggedin = token !== null;
+    console.log("loggedin serverside: ", loggedin)
 
-    // Return authentication data as props
     return {
         props: {
             loggedin
