@@ -3,12 +3,8 @@
   import { onMount } from 'svelte';
   import Login from "$lib/components/Login.svelte";
 
-  export let loggedin;
-  console.log('loggedin clinetside before mount: ', loggedin);
-
-  onMount(() => {
-    console.log('loggedin clienside onmount: ', loggedin);
-  });
+  export let data;
+  const loggedin = data.loggedin;
 </script>
 
 <Header />
