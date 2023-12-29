@@ -5,6 +5,13 @@
 
   export let data;
   const loggedin = data.loggedin;
+
+  onMount(() => {
+    // if not logged in redirect to login page
+    if (!loggedin) {
+      window.location.href = '/';
+    }
+  });
 </script>
 
 <Header />
