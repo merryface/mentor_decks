@@ -8,7 +8,7 @@
 
   onMount(() => {
     // if not logged in redirect to login page
-    if (!loggedin) {
+    if (!loggedin && window.location.pathname !== '/') {
       window.location.href = '/';
     }
   });

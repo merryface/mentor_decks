@@ -5,7 +5,6 @@
   export let data;
 
   onMount(() => {
-    // if logged in redirect to dashboard page
     if (data.loggedin) {
       window.location.href = '/dashboard';
     }
