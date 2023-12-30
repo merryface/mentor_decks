@@ -10,7 +10,7 @@
 
 
 <button on:click={handleLogin}>Log in With VATSIM credentials</button>
-<p>This login page is temporarily just a mockup. Click login to access the website which is currently available to anyone.</p>
+<p>You must be approved user to log in. Contact The Advanced FI to gain access.</p>
 
 <style>
   button {
