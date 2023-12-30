@@ -3,6 +3,7 @@
   import Header from "$lib/components/Header.svelte";
   import { onMount } from "svelte";
   export let data;
+  console.log(data.loggedin);
 
   // Environment variables
   const VATSIM_CLIENT_ID = import.meta.env.VITE_VATSIM_CLIENT_ID;
@@ -25,9 +26,8 @@
   });
 </script>
 
-<Header />
+<Header {data} />
 <div class="container">
-
   <slot />
 </div>
 
