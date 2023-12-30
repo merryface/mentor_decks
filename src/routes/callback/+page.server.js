@@ -31,7 +31,6 @@ export const load = async ({url, cookies}) => {
             },
             body: params.toString()
         });
-        console.log(token_resp);
     } catch (e) {
         console.error(e);
         return {
@@ -65,22 +64,23 @@ export const load = async ({url, cookies}) => {
     }
 
     let user_details = (await user_details_resp.json()).data;
+    console.log(await user_details.cid);
 
     const approvedCids = [
-        10000000,
-        10000001,
-        10000002,
-        10000003,
-        10000004,
-        10000005,
-        10000006,
-        10000007,
-        10000008,
-        10000009,
-        10000010,
+        "10000000",
+        "10000001",
+        "10000002",
+        "10000003",
+        "10000004",
+        "10000005",
+        "10000006",
+        "10000007",
+        "10000008",
+        "10000009",
     ]
 
     if (!approvedCids.includes(user_details.cid)) {
+
         return {
             err: "You are not authorized to access this site."
         }
