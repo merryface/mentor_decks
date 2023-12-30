@@ -66,8 +66,29 @@ export const load = async ({url, cookies}) => {
 
     let user_details = (await user_details_resp.json()).data;
 
+    const approvedCids = [
+        10000000,
+        10000001,
+        10000002,
+        10000003,
+        10000004,
+        10000005,
+        10000006,
+        10000007,
+        10000008,
+        10000009,
+        10000010,
+    ]
 
-    let token = user_details.cid;
-    cookies.set("hq_token", token, {path: "/"});
-    redirect(301, "/dashboard");
+    if (!approvedCids.includes(user_details.cid)) {
+        return {
+            err: "You are not authorized to access this site."
+        }
+    }
+
+    if (approvedCids.includes(user_details.cid)) {
+        let token = user_details.cid;
+        cookies.set("hq_token", token, {path: "/"});
+        redirect(301, "/dashboard");
+    }
 }
