@@ -3,7 +3,7 @@
 </script>
 
 <div class="remedial-exercises">
-  <h3>Flight Profile</h3>
+  <h3>Suggested Remedial Exercises</h3>
   {#each remedialExercises as exercise}
   <div class="exercise-item">
     <div class="weakness">{exercise.weakness}</div>
