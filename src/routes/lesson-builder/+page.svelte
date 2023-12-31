@@ -7,7 +7,8 @@
     image: "",
     assessmentQuestions: [],
     exercises: [],
-    configuration: {}
+    configuration: {},
+    remedialExercises: []
   };
 
   let assessmentQuestion = '';
@@ -58,7 +59,8 @@
       image: "",
       assessmentQuestions: [],
       exercises: [],
-      configuration: {}
+      configuration: {},
+      remedialExercises: []
     };
     localStorage.removeItem('lessonData');
     console.log('Data reset and cleared from localStorage');
@@ -93,6 +95,18 @@
       lesson.exercises = updatedExercises;
       exerciseItem = { item: "", criteria: "" };
     }
+  };
+
+  const deleteQuestion = (index) => {
+    let updatedQuestions = [...lesson.assessmentQuestions];
+    updatedQuestions.splice(index, 1);
+    lesson.assessmentQuestions = updatedQuestions;
+  };
+
+  const deleteCriteria = (index) => {
+    let updatedExercises = [...lesson.exercises];
+    updatedExercises[selectedItemIndex].exerciseItems.splice(index, 1);
+    lesson.exercises = updatedExercises;
   };
 
   onMount(() => {
@@ -130,6 +144,22 @@
       <input type="text" bind:value={assessmentAnswer} placeholder="Answer" />
     </label>
     <button type="button" on:click={addQuestion}>Add Question</button>
+
+    {#if lesson.assessmentQuestions.length > 0}
+    <div class="currentQuestions">
+      <p>Current Questions</p>
+      {#each lesson.assessmentQuestions as question, index}
+      <div class="question">
+        <div class="info">
+          <p>{index + 1}. {question.question}</p>
+          <p>{question.answer}</p>
+        </div>
+        <button on:click={deleteQuestion}>Delete</button>
+        </div>
+      {/each}
+
+    </div>
+    {/if}
   </div>
 
   <div class="multiPart">
@@ -162,6 +192,19 @@
       <input type="text" bind:value={exerciseItem.criteria} placeholder="Exercise criteria" />
     </label>
     <button type="button" on:click={addExerciseItem}>Add Item</button>
+
+    <div class="itemsOfCurrentExercise">
+      <p>Current Items</p>
+      {#each lesson.exercises[selectedItemIndex].exerciseItems as item, index}
+      <div class="question">
+        <div class="info">
+          <p>{index + 1}. {item.item}</p>
+          <p>{item.criteria}</p>
+        </div>
+        <button on:click={deleteCriteria}>Delete</button>
+      </div>
+      {/each}
+    </div>
   </div>
   {/if}
 
@@ -371,5 +414,19 @@
 
   .slider.round:before {
     border-radius: 50%;
+  }
+
+  .question {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5rem;
   }
 </style>
