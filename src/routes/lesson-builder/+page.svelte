@@ -14,6 +14,9 @@
   let assessmentQuestion = '';
   let assessmentAnswer = '';
 
+  let remediationItem = '';
+  let suggestedExercise = '';
+
   let exerciseTitle = '';
   let selectedItemIndex = 0; // Index of the selected exercise
   let exerciseItem = { item: "", criteria: "" };
@@ -107,6 +110,22 @@
     let updatedExercises = [...lesson.exercises];
     updatedExercises[selectedItemIndex].exerciseItems.splice(index, 1);
     lesson.exercises = updatedExercises;
+  };
+
+  const addRemediationExercise = () => {
+    if (remediationItem === '' || suggestedExercise === '') return;
+    lesson.remedialExercises = [
+      ...lesson.remedialExercises,
+      { weakness: remediationItem, remediation: suggestedExercise }
+    ];
+    weakness = '';
+    remediation = '';
+  };
+
+  const deleteRemediationExercise = (index) => {
+    let updatedRemedialExercises = [...lesson.remedialExercises];
+    updatedRemedialExercises.splice(index, 1);
+    lesson.remedialExercises = updatedRemedialExercises;
   };
 
   onMount(() => {
@@ -267,6 +286,35 @@
       <textarea bind:value={config.notes} placeholder="Notes" maxlength="250"></textarea>
     </label>
   </div>
+
+  <div class="multiPart">
+    <p>Suggested Remedial Exercises</p>
+    <label>
+      Item needing remediation
+      <input type="text" bind:value={remediationItem} placeholder="Remediation Item" />
+    </label>
+    <label>
+      Suggested Exercises
+      <input type="text" bind:value={suggestedExercise} placeholder="Suggested Exercise" />
+    </label>
+    <button type="button" on:click={addRemediationExercise}>Add Remediation Exercise</button>
+
+    {#if lesson.remedialExercises.length > 0}
+    <div class="currentRemediation">
+      <p>Current Questions</p>
+      {#each lesson.remedialExercises as remediation, index}
+      <div class="remediation">
+        <div class="info">
+          <p>{index + 1}. {remediation.weakness}</p>
+          <p>{remediation.remediation}</p>
+        </div>
+        <button on:click={deleteRemediationExercise}>Delete</button>
+        </div>
+      {/each}
+
+    </div>
+    {/if}
+  </div>
 </form>
 
 <pre>{JSON.stringify(lesson, null, 2)}</pre>
@@ -416,7 +464,7 @@
     border-radius: 50%;
   }
 
-  .question {
+  .question, .remediation {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
