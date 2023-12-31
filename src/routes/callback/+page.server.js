@@ -67,6 +67,7 @@ export const load = async ({url, cookies}) => {
     console.log(await user_details.cid);
 
     const approvedCids = [
+        // Sandbox profiles
         "10000000",
         "10000001",
         "10000002",
@@ -77,6 +78,10 @@ export const load = async ({url, cookies}) => {
         "10000007",
         "10000008",
         "10000009",
+        "10000010",
+        // Instructors
+        "1238583",
+        "1378824"
     ]
 
     if (!approvedCids.includes(user_details.cid)) {
