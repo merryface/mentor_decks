@@ -7,11 +7,15 @@
     image: "",
     assessmentQuestions: [],
     exercises: [],
-    configuration: {}
+    configuration: {},
+    remedialExercises: []
   };
 
   let assessmentQuestion = '';
   let assessmentAnswer = '';
+
+  let remediationItem = '';
+  let suggestedExercise = '';
 
   let exerciseTitle = '';
   let selectedItemIndex = 0; // Index of the selected exercise
@@ -58,7 +62,8 @@
       image: "",
       assessmentQuestions: [],
       exercises: [],
-      configuration: {}
+      configuration: {},
+      remedialExercises: []
     };
     localStorage.removeItem('lessonData');
     console.log('Data reset and cleared from localStorage');
@@ -93,6 +98,34 @@
       lesson.exercises = updatedExercises;
       exerciseItem = { item: "", criteria: "" };
     }
+  };
+
+  const deleteQuestion = (index) => {
+    let updatedQuestions = [...lesson.assessmentQuestions];
+    updatedQuestions.splice(index, 1);
+    lesson.assessmentQuestions = updatedQuestions;
+  };
+
+  const deleteCriteria = (index) => {
+    let updatedExercises = [...lesson.exercises];
+    updatedExercises[selectedItemIndex].exerciseItems.splice(index, 1);
+    lesson.exercises = updatedExercises;
+  };
+
+  const addRemediationExercise = () => {
+    if (remediationItem === '' || suggestedExercise === '') return;
+    lesson.remedialExercises = [
+      ...lesson.remedialExercises,
+      { weakness: remediationItem, remediation: suggestedExercise }
+    ];
+    weakness = '';
+    remediation = '';
+  };
+
+  const deleteRemediationExercise = (index) => {
+    let updatedRemedialExercises = [...lesson.remedialExercises];
+    updatedRemedialExercises.splice(index, 1);
+    lesson.remedialExercises = updatedRemedialExercises;
   };
 
   onMount(() => {
@@ -130,6 +163,22 @@
       <input type="text" bind:value={assessmentAnswer} placeholder="Answer" />
     </label>
     <button type="button" on:click={addQuestion}>Add Question</button>
+
+    {#if lesson.assessmentQuestions.length > 0}
+    <div class="currentQuestions">
+      <p>Current Questions</p>
+      {#each lesson.assessmentQuestions as question, index}
+      <div class="question">
+        <div class="info">
+          <p>{index + 1}. {question.question}</p>
+          <p>{question.answer}</p>
+        </div>
+        <button on:click={deleteQuestion}>Delete</button>
+        </div>
+      {/each}
+
+    </div>
+    {/if}
   </div>
 
   <div class="multiPart">
@@ -162,6 +211,19 @@
       <input type="text" bind:value={exerciseItem.criteria} placeholder="Exercise criteria" />
     </label>
     <button type="button" on:click={addExerciseItem}>Add Item</button>
+
+    <div class="itemsOfCurrentExercise">
+      <p>Current Items</p>
+      {#each lesson.exercises[selectedItemIndex].exerciseItems as item, index}
+      <div class="question">
+        <div class="info">
+          <p>{index + 1}. {item.item}</p>
+          <p>{item.criteria}</p>
+        </div>
+        <button on:click={deleteCriteria}>Delete</button>
+      </div>
+      {/each}
+    </div>
   </div>
   {/if}
 
@@ -223,6 +285,35 @@
       Notes
       <textarea bind:value={config.notes} placeholder="Notes" maxlength="250"></textarea>
     </label>
+  </div>
+
+  <div class="multiPart">
+    <p>Suggested Remedial Exercises</p>
+    <label>
+      Item needing remediation
+      <input type="text" bind:value={remediationItem} placeholder="Remediation Item" />
+    </label>
+    <label>
+      Suggested Exercises
+      <input type="text" bind:value={suggestedExercise} placeholder="Suggested Exercise" />
+    </label>
+    <button type="button" on:click={addRemediationExercise}>Add Remediation Exercise</button>
+
+    {#if lesson.remedialExercises.length > 0}
+    <div class="currentRemediation">
+      <p>Current Questions</p>
+      {#each lesson.remedialExercises as remediation, index}
+      <div class="remediation">
+        <div class="info">
+          <p>{index + 1}. {remediation.weakness}</p>
+          <p>{remediation.remediation}</p>
+        </div>
+        <button on:click={deleteRemediationExercise}>Delete</button>
+        </div>
+      {/each}
+
+    </div>
+    {/if}
   </div>
 </form>
 
@@ -371,5 +462,19 @@
 
   .slider.round:before {
     border-radius: 50%;
+  }
+
+  .question, .remediation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5rem;
   }
 </style>
