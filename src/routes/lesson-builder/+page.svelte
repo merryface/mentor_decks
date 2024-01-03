@@ -47,12 +47,14 @@
   const saveToLocalStorage = () => {
     localStorage.setItem('lessonData', JSON.stringify(lesson));
     console.log('Data saved to localStorage');
+    alert('Data saved!');
   };
 
   const addToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(JSON.stringify(lesson, null, 2));
       console.log('Copied to clipboard');
+      alert('Copied to clipboard');
     } catch (err) {
       console.error('Failed to copy: ', err);
     }
@@ -121,8 +123,8 @@
       ...lesson.remedialExercises,
       { weakness: remediationItem, remediation: suggestedExercise }
     ];
-    weakness = '';
-    remediation = '';
+    remediationItem = '';
+    suggestedExercise = '';
   };
 
   const deleteRemediationExercise = (index) => {
@@ -155,6 +157,7 @@
     <input type="text" bind:value={lesson.lessonTitle} placeholder="Lesson Title" />
   </label>
 
+  <!-- Assessment Questions -->
   <div class="multiPart">
     <p>Assessment Questions</p>
     <label>
@@ -184,6 +187,7 @@
     {/if}
   </div>
 
+  <!-- Exercises -->
   <div class="multiPart">
     <p>Exercises</p>
     <label>
@@ -314,6 +318,7 @@
     </label>
   </div>
 
+  <!-- Remedial Exercises -->
   <div class="multiPart">
     <p>Suggested Remedial Exercises</p>
     <label>
