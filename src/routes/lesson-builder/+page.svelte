@@ -22,13 +22,16 @@
   let exerciseItem = { item: "", criteria: "" };
 
   let config = {
+    // a/c config
     status: "Cold & dark",
     fuel: "50-100%",
     payload: "189kg",
     bags: "20kg",
+    // Flight config
     location: "Parking ramp",
     atc: "None",
     runway: "27L",
+    // Weather config
     liveWeather: false,
     wind: "Calm",
     temp: "15°C",
@@ -227,8 +230,10 @@
   </div>
   {/if}
 
+  <!-- Flight Profile -->
   <div class="multiPart">
-    <p>Configuration</p>
+    <p>Flight Profile</p>
+    <!-- aircraft config -->
     <label>
       Status
       <input type="text" bind:value={config.status} placeholder="Status" />
@@ -244,6 +249,28 @@
       <input type="text" bind:value={config.payload} placeholder="Payload" />
     </label>
 
+    <label>
+      Luggage Weight
+      <input type="text" bind:value={config.bags} placeholder="Payload" />
+    </label>
+
+    <!-- Flight Configuration -->
+    <label>
+      Location
+      <input type="text" bind:value={config.location} placeholder="Location" />
+    </label>
+
+    <label>
+      ATC
+      <input type="text" bind:value={config.atc} placeholder="ATC" />
+    </label>
+
+    <label>
+      Runway
+      <input type="text" bind:value={config.runway} placeholder="Runway" />
+    </label>
+
+    <!-- Weather -->
     <label>
       Live Weather
       <div class="switch">
