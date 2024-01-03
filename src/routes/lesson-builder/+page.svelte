@@ -500,7 +500,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     gap: 2rem;
+    margin-bottom: 0.5rem;
   }
 
   .info {
@@ -508,5 +510,17 @@
     flex-direction: row;
     justify-content: space-between;
     gap: 0.5rem;
+    width: 90%;
+  }
+
+  .info > :first-child {
+    color: #17375E;
+    margin-right: 1.5rem;
+  }
+
+  @media screen and (max-width: 782px) {
+    .question p, .remediation p {
+      font-size: 1rem;
+    }
   }
 </style>
