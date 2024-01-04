@@ -22,13 +22,16 @@
   let exerciseItem = { item: "", criteria: "" };
 
   let config = {
+    // a/c config
     status: "Cold & dark",
     fuel: "50-100%",
     payload: "189kg",
     bags: "20kg",
+    // Flight config
     location: "Parking ramp",
     atc: "None",
     runway: "27L",
+    // Weather config
     liveWeather: false,
     wind: "Calm",
     temp: "15°C",
@@ -44,12 +47,14 @@
   const saveToLocalStorage = () => {
     localStorage.setItem('lessonData', JSON.stringify(lesson));
     console.log('Data saved to localStorage');
+    alert('Data saved!');
   };
 
   const addToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(JSON.stringify(lesson, null, 2));
       console.log('Copied to clipboard');
+      alert('Copied to clipboard');
     } catch (err) {
       console.error('Failed to copy: ', err);
     }
@@ -118,8 +123,8 @@
       ...lesson.remedialExercises,
       { weakness: remediationItem, remediation: suggestedExercise }
     ];
-    weakness = '';
-    remediation = '';
+    remediationItem = '';
+    suggestedExercise = '';
   };
 
   const deleteRemediationExercise = (index) => {
@@ -152,6 +157,7 @@
     <input type="text" bind:value={lesson.lessonTitle} placeholder="Lesson Title" />
   </label>
 
+  <!-- Assessment Questions -->
   <div class="multiPart">
     <p>Assessment Questions</p>
     <label>
@@ -181,6 +187,7 @@
     {/if}
   </div>
 
+  <!-- Exercises -->
   <div class="multiPart">
     <p>Exercises</p>
     <label>
@@ -227,8 +234,10 @@
   </div>
   {/if}
 
+  <!-- Flight Profile -->
   <div class="multiPart">
-    <p>Configuration</p>
+    <p>Flight Profile</p>
+    <!-- aircraft config -->
     <label>
       Status
       <input type="text" bind:value={config.status} placeholder="Status" />
@@ -244,6 +253,28 @@
       <input type="text" bind:value={config.payload} placeholder="Payload" />
     </label>
 
+    <label>
+      Luggage Weight
+      <input type="text" bind:value={config.bags} placeholder="Payload" />
+    </label>
+
+    <!-- Flight Configuration -->
+    <label>
+      Location
+      <input type="text" bind:value={config.location} placeholder="Location" />
+    </label>
+
+    <label>
+      ATC
+      <input type="text" bind:value={config.atc} placeholder="ATC" />
+    </label>
+
+    <label>
+      Runway
+      <input type="text" bind:value={config.runway} placeholder="Runway" />
+    </label>
+
+    <!-- Weather -->
     <label>
       Live Weather
       <div class="switch">
@@ -287,6 +318,7 @@
     </label>
   </div>
 
+  <!-- Remedial Exercises -->
   <div class="multiPart">
     <p>Suggested Remedial Exercises</p>
     <label>
@@ -468,7 +500,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     gap: 2rem;
+    margin-bottom: 0.5rem;
   }
 
   .info {
@@ -476,5 +510,17 @@
     flex-direction: row;
     justify-content: space-between;
     gap: 0.5rem;
+    width: 90%;
+  }
+
+  .info > :first-child {
+    color: #17375E;
+    margin-right: 1.5rem;
+  }
+
+  @media screen and (max-width: 782px) {
+    .question p, .remediation p {
+      font-size: 1rem;
+    }
   }
 </style>
