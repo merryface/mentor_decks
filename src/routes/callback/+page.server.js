@@ -83,6 +83,7 @@ export const load = async ({url, cookies}) => {
         "1238583",
         "1378824",
         "1401212",
+        "959578"
     ]
 
     if (!approvedCids.includes(user_details.cid)) {
