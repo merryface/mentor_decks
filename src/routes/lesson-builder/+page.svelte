@@ -179,7 +179,7 @@
           <p>{index + 1}. {question.question}</p>
           <p>{question.answer}</p>
         </div>
-        <button on:click={deleteQuestion}>Delete</button>
+        <button on:click={() => deleteQuestion(index)}>Delete</button>
         </div>
       {/each}
 
@@ -227,7 +227,7 @@
           <p>{index + 1}. {item.item}</p>
           <p>{item.criteria}</p>
         </div>
-        <button on:click={deleteCriteria}>Delete</button>
+        <button on:click={() => deleteCriteria(index)}>Delete</button>
       </div>
       {/each}
     </div>
