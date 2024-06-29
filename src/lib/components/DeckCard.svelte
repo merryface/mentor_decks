@@ -14,9 +14,9 @@
 <h2>{lessonTitle}</h2>
 <BriefAndAssessment data={data}/>
 
-{#each exercises as exercise}
+<!-- {#each exercises as exercise}
 <Exercise data={exercise} />
-{/each}
+{/each} -->
 
 <FlightProfile data={data.configuration} />
 <RemedialExercises remedialExercises={remedialExercises} />
