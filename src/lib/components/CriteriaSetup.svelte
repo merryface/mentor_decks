@@ -29,9 +29,10 @@
   }
 </script>
 
-<h3>HTML Table Generator</h3>
+<h3 class="html-generator-title">HTML Table Generator</h3>
 <div class="exercises-container" bind:this={tableElement}>
   {#each exercises as exercise}
+  <h4>{exercise.title}</h4>
     <table class="exercise-table">
       <thead>
         <tr>
@@ -95,6 +96,10 @@
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+  }
+
+  .html-generator-title {
+    margin-bottom: 2rem;
   }
 
   .exercise-table {
