@@ -44,6 +44,7 @@
   // Update lesson configuration whenever config changes
   $: lesson.configuration = config;
 
+  // Local storage and clipboard functions
   const saveToLocalStorage = () => {
     localStorage.setItem('lessonData', JSON.stringify(lesson));
     console.log('Data saved to localStorage');
@@ -74,6 +75,7 @@
     console.log('Data reset and cleared from localStorage');
   };
 
+  // Questions
   const addQuestion = () => {
     lesson.assessmentQuestions = [
       ...lesson.assessmentQuestions,
@@ -83,6 +85,13 @@
     assessmentAnswer = '';
   };
 
+  const deleteQuestion = (index) => {
+    let updatedQuestions = [...lesson.assessmentQuestions];
+    updatedQuestions.splice(index, 1);
+    lesson.assessmentQuestions = updatedQuestions;
+  };
+
+  // Exercises
   const addExercise = () => {
     if (exerciseTitle === '') return;
     lesson.exercises = [
@@ -92,6 +101,21 @@
     exerciseTitle = '';
   };
 
+  const deleteExercise = (index) => {
+  if (index >= 0 && index < lesson.exercises.length) {
+    // Create a new array excluding the exercise at the specified index
+    const updatedExercises = [
+      ...lesson.exercises.slice(0, index),
+      ...lesson.exercises.slice(index + 1)
+    ];
+    lesson.exercises = updatedExercises;
+
+    // Reset selectedItemIndex after deletion
+    selectedItemIndex = 0;
+  }
+};
+
+  // Exercise Items
   const addExerciseItem = () => {
     if (exerciseItem.item === '' || exerciseItem.criteria === '') return;
     if (lesson.exercises.length > 0) {
@@ -105,17 +129,23 @@
     }
   };
 
-  const deleteQuestion = (index) => {
-    let updatedQuestions = [...lesson.assessmentQuestions];
-    updatedQuestions.splice(index, 1);
-    lesson.assessmentQuestions = updatedQuestions;
-  };
+  function deleteExerciseItem(index) {
+    if (index >= 0 && index < lesson.exercises.length) {
+      lesson.exercises.splice(index, 1);
+      selectedItemIndex = -1; // Reset selected index
+    }
+  }
+
+
+  // Exercise Criteria
 
   const deleteCriteria = (index) => {
     let updatedExercises = [...lesson.exercises];
     updatedExercises[selectedItemIndex].exerciseItems.splice(index, 1);
     lesson.exercises = updatedExercises;
   };
+
+  // Remediation Exercises
 
   const addRemediationExercise = () => {
     if (remediationItem === '' || suggestedExercise === '') return;
@@ -200,12 +230,15 @@
   {#if lesson.exercises.length > 0}
   <div class="multiPart">
     <label>
-      Select Exercise to add Items to
-      <select bind:value={selectedItemIndex}>
-        {#each lesson.exercises as exercise, index}
-        <option value={index}>{exercise.title}</option>
-        {/each}
-      </select>
+      <p>Select Exercise</p>
+      <div class="exercise-inputs">
+        <select bind:value={selectedItemIndex}>
+          {#each lesson.exercises as exercise, index}
+          <option value={index}>{exercise.title}</option>
+          {/each}
+        </select>
+        <button on:click={() => deleteExercise(selectedItemIndex)}>Delete Exercise</button>
+      </div>
     </label>
 
     <label>
@@ -222,13 +255,13 @@
     <div class="itemsOfCurrentExercise">
       <p>Current Items</p>
       {#each lesson.exercises[selectedItemIndex].exerciseItems as item, index}
-      <div class="question">
-        <div class="info">
-          <p>{index + 1}. {item.item}</p>
-          <p>{item.criteria}</p>
+        <div class="question">
+          <div class="info">
+            <p>{index + 1}. {item.item}</p>
+            <p>{item.criteria}</p>
+          </div>
+          <button on:click={() => deleteCriteria(index)}>Delete</button>
         </div>
-        <button on:click={() => deleteCriteria(index)}>Delete</button>
-      </div>
       {/each}
     </div>
   </div>
@@ -389,9 +422,27 @@
     border: 1px solid #17375E;
   }
 
+  .exercise-inputs {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .exercise-inputs select, .exercise-inputs button {
+    height: 3rem;
+    width: 50%;
+    margin-top: 0;
+  }
+
   .multiPart, label {
     display: flex;
     flex-direction: column;
+  }
+
+  .multiPart label p {
+    margin-bottom: 1rem;
   }
 
   .multiPart {
