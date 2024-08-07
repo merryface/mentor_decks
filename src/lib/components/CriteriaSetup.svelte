@@ -4,17 +4,29 @@
   let tableElement;
 
   function getTableHtmlWithCurrentValues() {
-    // Clone the table to not alter the original
-    const clonedTable = tableElement.cloneNode(true);
+    // Select the table element
+    const table = document.querySelector('table');
+    const rows = table.rows;
 
-    // Replace each select element with its current value
-    clonedTable.querySelectorAll('select').forEach(select => {
-      const currentValue = select.options[select.selectedIndex].textContent;
-      const textNode = document.createTextNode(currentValue);
-      select.parentNode.replaceChild(textNode, select);
-    });
+    // Iterate through each row
+    for (let i = 0; i < rows.length; i++) {
+      const cells = rows[i].cells;
 
-    return clonedTable.outerHTML;
+      // Iterate through each cell in the row
+      for (let j = 0; j < cells.length; j++) {
+        const cell = cells[j];
+        const dropdown = cell.querySelector('select');
+
+        // If the cell contains a dropdown, replace it with the selected value
+        if (dropdown) {
+          const selectedValue = dropdown.options[dropdown.selectedIndex].text;
+          cell.innerHTML = selectedValue;
+        }
+      }
+    }
+
+    // Return the modified HTML of the table
+    return table.outerHTML;
   }
 
   async function copyTableHtml() {
@@ -24,7 +36,7 @@
       await navigator.clipboard.writeText(tableHtml);
       alert('Table HTML copied to clipboard!');
     } catch (err) {
-      console.error('Failed to copy: ', err);
+      console.error('Failed to copy table HTML: ', err);
     }
   }
 </script>
