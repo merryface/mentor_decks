@@ -5,6 +5,8 @@
   <a href="/p3">P3 Rating</a>
 </nav>
 
+<a href="/lesson-builder" class="builder">LESSON BUILDER</a>
+
 <style>
 nav {
   display: flex;
@@ -39,5 +41,17 @@ nav {
     padding: 1rem;
     text-align: center;
     border-radius: 5px;
+  }
+
+  .builder {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: transparent;
+    border: none;
+    opacity: 0;
+    pointer-events: auto; 
   }
 </style>
