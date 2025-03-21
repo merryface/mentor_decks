@@ -15,7 +15,7 @@
       try {
         const response = await fetch(`https://merryface.github.io/mentor_decks_data/p3_rating.json`);
         if (!response.ok) {
-          throw error(404, 'Lesson not found');
+          throw error(404, 'Syllabus not found');
         }
         const lessons = await response.json();
 
